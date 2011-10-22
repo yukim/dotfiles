@@ -58,20 +58,7 @@ endif
 
 "-------------------------------------------------------------------------------
 " Platform dependent
-if has('unix') && !has('gui_running')
-  let uname = system('uname')
-  if uname =~? "linux"
-    set term=builtin_linux
-  elseif uname =~? "freebsd"
-    set term=builtin_cons25
-  elseif uname =~? "Darwin"
-    set term=beos-ansi
-  else
-    set term=builtin_xterm
-  endif
-  unlet uname
-endif
-
+"-------------------------------------------------------------------------------
 if has('win32') && $PATH !~? '\(^\|;\)' . escape($VIM, '\\') . '\(;\|$\)'
   let $PATH = $VIM . ';' . $PATH
 endif
