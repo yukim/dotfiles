@@ -79,10 +79,16 @@ call vundle#rc()
 
 Bundle 'gmarik/vundle'
 Bundle 'Shougo/unite.vim'
+Bundle 'Shougo/neocomplcache'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
 Bundle 'juvenn/mustache.vim'
 Bundle 'kchmck/vim-coffee-script'
+Bundle 'thinca/vim-ref'
+Bundle 'thinca/vim-quickrun'
+Bundle 'VimClojure'
+
+let g:neocomplcache_enable_at_startup=1
 
 " HTML tidy
 autocmd FileType html :compiler tidy
@@ -91,6 +97,11 @@ autocmd FileType html :setlocal sw=2 sts=2
 
 " JavaScript
 autocmd FileType javascript :setlocal sw=2 sts=2 
+
+" Clojure
+let vimclojure#HighlightBuiltis=1
+let vimclojure#ParenRainbow=1
+au FileType clj :setlocal filetype=clojure
 
 "-------------------------------------------------------------------------------
 " Print options
