@@ -10,7 +10,8 @@ setopt share_history        # share command history data
 bindkey -v
 
 # Auto Completion
-zstyle :compinstall filename '/home/yuki/.zshrc'
+#zstyle :compinstall filename '/home/yuki/.zshrc'
+zstyle :compinstall filename '/Users/yuki/.zshrc'
 autoload -Uz compinit
 compinit
 
@@ -38,7 +39,7 @@ local GREEN=$'%{\e[1;32m%}'
 local BLUE=$'%{\e[1;34m%}'
 
 # Prompt
-PROMPT=$LIGHT_GRAY'[${USER}@${HOST}] %(!.#.$) '$DEFAULT
+PROMPT=$LIGHT_GRAY'[${USER}]%(!.#.$) '$DEFAULT
 RPROMPT=%1(v|%F{green}%1v%f|)$LIGHT_GRAY'[%~]'$DEFAULT
 setopt PROMPT_SUBST
 
@@ -52,20 +53,22 @@ kterm*|xterm)
 esac
 
 # Aliases
-alias ls='ls -F --color=auto'
-alias ll='ls -la --color=auto'
-alias setproxy='export http_proxy=http://10.9.21.20:8000'
-alias noproxy='export http_proxy='
+alias ls='ls -GF'
+alias ll='ls -Gla'
+
+alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
 
 #
 export CPLUS_INCLUDE_PATH=/usr/local/include/thrift/
 
 # Environmental Settings
-export JAVA_HOME=/opt/java
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+export JAVA_OPTIONS="-Dfile.encoding=UTF-8"
 export MAVEN_HOME=/opt/maven
 export ANT_HOME=/opt/ant
+export ANT_OPTS="-Dfile.encoding=UTF-8"
 
-export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:$PATH
+export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:~/Developments/bin:$PATH
 
 export LD_LIBRARY_PATH=/usr/local/lib
 
@@ -74,15 +77,14 @@ export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
 export EDITOR=vim
-export VISUAL=gvim
+export VISUAL=vim
 
-# nvm
-. ~/.nvm/nvm.sh
+export CLOJURE_EXT=~/Developments/tools/clojure
 
 # zaw
-source ~/src/zaw/zaw.zsh
-zsh-history() {
-  zaw zaw-src-history
-}
-zle -N zsh-history
-bindkey '^Xh' zsh-history
+#source ~/src/zaw/zaw.zsh
+#zsh-history() {
+#  zaw zaw-src-history
+#}
+#zle -N zsh-history
+#bindkey '^Xh' zsh-history

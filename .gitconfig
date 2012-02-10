@@ -1,3 +1,10 @@
 [user]
-	email = mor.yuki@gmail.com
 	name = Yuki Morishita
+	email = mor.yuki@gmail.com
+[alias]
+	co = checkout
+	st = status -bs
+	ci = commit
+	br = branch -vv
+[core]
+	excludesfile = /Users/yuki/.gitignore

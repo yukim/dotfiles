@@ -1,0 +1,11 @@
+# vim swap file
+*.pyc
+*.swp
+*.patch
+# eclipse files
+.project
+.classpath
+.externalToolBuilders
+# IntelliJ files
+*.iml
+.idea

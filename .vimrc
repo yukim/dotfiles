@@ -87,8 +87,13 @@ Bundle 'kchmck/vim-coffee-script'
 Bundle 'thinca/vim-ref'
 Bundle 'thinca/vim-quickrun'
 Bundle 'VimClojure'
+Bundle 'Lokaltog/vim-powerline'
 
 let g:neocomplcache_enable_at_startup=1
+
+"-------------------------------------------------------------------------------
+" Plugin settings
+"-------------------------------------------------------------------------------
 
 " HTML tidy
 autocmd FileType html :compiler tidy
@@ -98,10 +103,14 @@ autocmd FileType html :setlocal sw=2 sts=2
 " JavaScript
 autocmd FileType javascript :setlocal sw=2 sts=2 
 
-" Clojure
+" clojure
 let vimclojure#HighlightBuiltis=1
 let vimclojure#ParenRainbow=1
-au FileType clj :setlocal filetype=clojure
+autocmd FileType clj :setlocal ft=clojure sw=2 sts=2
+
+" Unite
+" 入力モードで開始する
+let g:unite_enable_start_insert=1
 
 "-------------------------------------------------------------------------------
 " Print options
@@ -127,9 +136,6 @@ nnoremap <Space>b  :<C-u>mak<CR>
 " Tlist
 nnoremap <silent> <F8> :TlistToggle<CR>
 
-" Unite
-" 入力モードで開始する
-let g:unite_enable_start_insert=1
 " バッファ一覧
 noremap <C-P> :Unite buffer<CR>
 " ファイル一覧
