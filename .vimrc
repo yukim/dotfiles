@@ -1,5 +1,4 @@
-set nocp
-filetype off
+set nocompatible
 
 "-------------------------------------------------------------------------------
 " Encodings
@@ -26,10 +25,6 @@ set showmatch
 set wildmenu
 set formatoptions+=mM
 
-"-------------------------------------------------------------------------------
-" Editor options
-"-------------------------------------------------------------------------------
-set statusline=%<%f\%m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P%y
 set number
 set ruler
 set nolist
@@ -39,16 +34,17 @@ set laststatus=2
 set cmdheight=2
 set showcmd
 set title
+
 syntax on
 
 "-------------------------------------------------------------------------------
 " File options
 "-------------------------------------------------------------------------------
 set nobackup
-autocmd FileType *
-\   if &l:omnifunc == ''
-\ |   setlocal omnifunc=syntaxcomplete#Complete
-\ | endif
+"autocmd FileType *
+"\   if &l:omnifunc == ''
+"\ |   setlocal omnifunc=syntaxcomplete#Complete
+"\ | endif
 
 "-------------------------------------------------------------------------------
 " tags
@@ -70,47 +66,72 @@ endif
 "-------------------------------------------------------------------------------
 " Vundle rocks!
 "-------------------------------------------------------------------------------
-set rtp+=~/.vim/bundle/vundle
+filetype on
+filetype off
+set runtimepath+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 "-------------------------------------------------------------------------------
 " Bundles
 "-------------------------------------------------------------------------------
-
 Bundle 'gmarik/vundle'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'VimClojure'
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
+Bundle 'mattn/webapi-vim'
+Bundle 'mattn/gist-vim'
 Bundle 'juvenn/mustache.vim'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'thinca/vim-ref'
 Bundle 'thinca/vim-quickrun'
-Bundle 'VimClojure'
-Bundle 'Lokaltog/vim-powerline'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'tpope/vim-fugitive'
+Bundle 'majutsushi/tagbar'
+"Bundle 'myusuf3/numbers.vim'
 
+filetype plugin indent on
 let g:neocomplcache_enable_at_startup=1
 
 "-------------------------------------------------------------------------------
 " Plugin settings
 "-------------------------------------------------------------------------------
+" vim-powerline
+let g:Powerline_symbols='fancy'
+"let g:Powerline_symbols='unicode'
+let g:Powerline_theme='skwp'
+"let g:Powerline_colorscheme='skwp'
 
 " HTML tidy
-autocmd FileType html :compiler tidy
-autocmd FileType html :setlocal makeprg=tidy\ -raw\ -quiet\ -errors\ --gnu-emacs\ yes\ \"%\"
+"autocmd FileType html :compiler tidy
+"autocmd FileType html :setlocal makeprg=tidy\ -raw\ -quiet\ -errors\ --gnu-emacs\ yes\ \"%\"
 autocmd FileType html :setlocal sw=2 sts=2 
 
-" JavaScript
+" javascript
 autocmd FileType javascript :setlocal sw=2 sts=2 
 
 " clojure
 let vimclojure#HighlightBuiltis=1
 let vimclojure#ParenRainbow=1
-autocmd FileType clj :setlocal ft=clojure sw=2 sts=2
+
+" coffee
+au BufWritePost *.coffee silent CoffeeMake!
+
+" ruby
+autocmd FileType ruby :setlocal sw=2 sts=2 
 
 " Unite
 " 入力モードで開始する
 let g:unite_enable_start_insert=1
+
+" quickrun
+augroup MyRSpec
+    autocmd!
+    autocmd BufWinEnter,BufNewFile *_spec.rb set filetype=ruby.rspec
+augroup END
+let g:quickrun_config = {}
+let g:quickrun_config['ruby.rspec'] = {'command': 'rspec'}
 
 "-------------------------------------------------------------------------------
 " Print options
@@ -136,6 +157,8 @@ nnoremap <Space>b  :<C-u>mak<CR>
 " Tlist
 nnoremap <silent> <F8> :TlistToggle<CR>
 
+"nnoremap <F3> :NumbersToggle<CR>
+
 " バッファ一覧
 noremap <C-P> :Unite buffer<CR>
 " ファイル一覧
@@ -152,5 +175,4 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
-filetype plugin indent on
 " vim:set fenc=utf-8 ts=8 sts=2 sw=2 tw=0:
