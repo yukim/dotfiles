@@ -6,5 +6,10 @@
 	st = status -bs
 	ci = commit
 	br = branch -vv
+	d = branch -D
 [core]
 	excludesfile = /Users/yuki/.gitignore
+[github]
+	user = yukim
+[credential]
+	helper = osxkeychain
