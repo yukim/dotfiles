@@ -10,8 +10,7 @@ setopt share_history        # share command history data
 bindkey -v
 
 # Auto Completion
-#zstyle :compinstall filename '/home/yuki/.zshrc'
-zstyle :compinstall filename '/Users/yuki/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 autoload -Uz compinit
 compinit
 
@@ -42,6 +41,7 @@ local BLUE=$'%{\e[1;34m%}'
 PROMPT=$LIGHT_GRAY'[${USER}]%(!.#.$) '$DEFAULT
 RPROMPT=%1(v|%F{green}%1v%f|)$LIGHT_GRAY'[%~]'$DEFAULT
 setopt PROMPT_SUBST
+setopt transient_rprompt
 
 # Terminal Title
 case "${TERM}" in
@@ -55,6 +55,7 @@ esac
 # Aliases
 alias ls='ls -GF'
 alias ll='ls -Gla'
+alias git=/usr/local/bin/git
 
 alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset"'
 
@@ -62,13 +63,14 @@ alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(whi
 export CPLUS_INCLUDE_PATH=/usr/local/include/thrift/
 
 # Environmental Settings
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0_29-b11-402.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home
 export JAVA_OPTIONS="-Dfile.encoding=UTF-8"
-export MAVEN_HOME=/opt/maven
-export ANT_HOME=/opt/ant
+#export MAVEN_HOME=/opt/maven
+#export ANT_HOME=/opt/ant
 export ANT_OPTS="-Dfile.encoding=UTF-8"
 
-export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:~/Developments/bin:$PATH
+export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:~/Developments/bin:~/Developments/tools/hadoop-1.0.1/bin:$PATH
 
 export LD_LIBRARY_PATH=/usr/local/lib
 
@@ -88,3 +90,10 @@ export CLOJURE_EXT=~/Developments/tools/clojure
 #}
 #zle -N zsh-history
 #bindkey '^Xh' zsh-history
+fpath=($HOME/.zsh/func $fpath)
+typeset -U fpath
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+source ~/.zsh/plugin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugin/go

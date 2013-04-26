@@ -13,3 +13,7 @@
 	user = yukim
 [credential]
 	helper = osxkeychain
+[push]
+	default = matching
+[color]
+	ui = true
