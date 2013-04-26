@@ -11,6 +11,7 @@ set fileencoding=utf-8
 "-------------------------------------------------------------------------------
 set ignorecase
 set smartcase
+set hlsearch
 
 "-------------------------------------------------------------------------------
 " Editing options
@@ -24,6 +25,7 @@ set wrapscan
 set showmatch
 set wildmenu
 set formatoptions+=mM
+set pastetoggle=<F2>
 
 set number
 set ruler
@@ -69,6 +71,7 @@ endif
 filetype on
 filetype off
 set runtimepath+=~/.vim/bundle/vundle/
+set runtimepath+=~/.vim/bundle/go/
 call vundle#rc()
 
 "-------------------------------------------------------------------------------
@@ -77,7 +80,6 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'VimClojure'
-Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'mattn/zencoding-vim'
@@ -87,16 +89,23 @@ Bundle 'juvenn/mustache.vim'
 Bundle 'thinca/vim-ref'
 Bundle 'thinca/vim-quickrun'
 Bundle 'kchmck/vim-coffee-script'
-Bundle 'tpope/vim-fugitive'
 Bundle 'majutsushi/tagbar'
+Bundle 'Lokaltog/vim-distinguished'
+Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-markdown'
+Bundle 'kien/ctrlp.vim'
+Bundle 'mozilla/rust', {'rtp': 'src/etc/vim'}
+"Bundle 'Shougo/unite.vim'
 "Bundle 'myusuf3/numbers.vim'
 
 filetype plugin indent on
-let g:neocomplcache_enable_at_startup=1
+colorscheme distinguished
 
 "-------------------------------------------------------------------------------
 " Plugin settings
 "-------------------------------------------------------------------------------
+let g:neocomplcache_enable_at_startup=1
 " vim-powerline
 let g:Powerline_symbols='fancy'
 "let g:Powerline_symbols='unicode'
@@ -132,6 +141,13 @@ augroup MyRSpec
 augroup END
 let g:quickrun_config = {}
 let g:quickrun_config['ruby.rspec'] = {'command': 'rspec'}
+let g:quickrun_config.markdown = {
+      \ 'outputter': 'null',
+      \ 'command'  : 'open',
+      \ 'cmdopt'   : '-a',
+      \ 'args'     : 'Marked',
+      \ 'exec'     : '%c %o %a %s',
+      \ }
 
 "-------------------------------------------------------------------------------
 " Print options
@@ -160,19 +176,19 @@ nnoremap <silent> <F8> :TlistToggle<CR>
 "nnoremap <F3> :NumbersToggle<CR>
 
 " バッファ一覧
-noremap <C-P> :Unite buffer<CR>
-" ファイル一覧
-noremap <C-N> :Unite -buffer-name=file file_rec<CR>
-" 最近使ったファイルの一覧
-noremap <C-Z> :Unite file_mru<CR>
-" ウィンドウを分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
-" ウィンドウを縦に分割して開く
-au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
-" ESCキーを2回押すと終了する
-au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
-au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+"noremap <C-P> :Unite buffer<CR>
+"" ファイル一覧
+"noremap <C-N> :Unite -buffer-name=file file_rec<CR>
+"" 最近使ったファイルの一覧
+"noremap <C-Z> :Unite file_mru<CR>
+"" ウィンドウを分割して開く
+"au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+"au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+"" ウィンドウを縦に分割して開く
+"au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+"au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+"" ESCキーを2回押すと終了する
+"au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+"au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 " vim:set fenc=utf-8 ts=8 sts=2 sw=2 tw=0:
