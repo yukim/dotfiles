@@ -63,14 +63,14 @@ alias gl='git log --graph --pretty="format:%C(yellow)%h%Cblue%d%Creset %s %C(whi
 export CPLUS_INCLUDE_PATH=/usr/local/include/thrift/
 
 # Environmental Settings
-#export JAVA_HOME=/Library/Java/JavaVirtualMachines/1.6.0_29-b11-402.jdk/Contents/Home
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_09.jdk/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/Home
 export JAVA_OPTIONS="-Dfile.encoding=UTF-8"
 #export MAVEN_HOME=/opt/maven
 #export ANT_HOME=/opt/ant
 export ANT_OPTS="-Dfile.encoding=UTF-8"
+export GOROOT=/usr/local/Cellar/go/1.1.1/
 
-export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:~/Developments/bin:~/Developments/tools/hadoop-1.0.1/bin:$PATH
+export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin:$ANT_HOME/bin:~/Developments/bin:~/Developments/tools/hadoop-1.0.1/bin:/usr/local/sbin:/usr/local/bin:$PATH
 
 export LD_LIBRARY_PATH=/usr/local/lib
 
@@ -96,4 +96,3 @@ typeset -U fpath
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 source ~/.zsh/plugin/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source ~/.zsh/plugin/go
